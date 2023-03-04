@@ -1,4 +1,5 @@
 import Carousal from "@/Components/Homepage/Carousal";
+import ShopByCategories from "@/Components/Homepage/ShopByCategories";
 import HomeLayout from "@/Layout/HomeLayout";
 import Head from "next/head";
 import { ReactElement } from "react";
@@ -14,6 +15,7 @@ export default function Home() {
       </Head>
       <main className="">
         <Carousal />
+        <ShopByCategories />
       </main>
     </>
   );

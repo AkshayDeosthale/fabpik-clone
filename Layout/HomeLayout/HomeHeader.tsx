@@ -1,6 +1,6 @@
+import { SmileOutlined } from "@ant-design/icons";
 import {
   AutoComplete,
-  Avatar,
   Badge,
   Button,
   Dropdown,
@@ -8,15 +8,16 @@ import {
   MenuProps,
   SelectProps,
 } from "antd";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import {
-  CiDiscount1,
   CiBellOn,
+  CiDiscount1,
   CiHeart,
+  CiSearch,
   CiShoppingBasket,
   CiUser,
 } from "react-icons/ci";
-import { DownOutlined, SmileOutlined } from "@ant-design/icons";
+import MobileNavbar from "./MobileNavbar";
 
 const getRandomInt = (max: number, min = 0) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
@@ -56,11 +57,7 @@ const items: MenuProps["items"] = [
   {
     key: "1",
     label: (
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://www.antgroup.com"
-      >
+      <a target="_blank" rel="noopener noreferrer" href="">
         1st menu item
       </a>
     ),
@@ -68,16 +65,11 @@ const items: MenuProps["items"] = [
   {
     key: "2",
     label: (
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://www.aliyun.com"
-      >
+      <a target="_blank" rel="noopener noreferrer" href="">
         2nd menu item (disabled)
       </a>
     ),
     icon: <SmileOutlined />,
-    disabled: true,
   },
   {
     key: "3",
@@ -90,7 +82,6 @@ const items: MenuProps["items"] = [
         3rd menu item (disabled)
       </a>
     ),
-    disabled: true,
   },
   {
     key: "4",
@@ -99,9 +90,12 @@ const items: MenuProps["items"] = [
   },
 ];
 
-type Props = {};
+type Props = {
+  setOpenSearch: Dispatch<SetStateAction<boolean>>;
+  openSearch: boolean;
+};
 
-const HomeHeader = ({}: Props) => {
+const HomeHeader = ({ setOpenSearch, openSearch }: Props) => {
   const [options, setOptions] = useState<SelectProps<object>["options"]>([]);
 
   const handleSearch = (value: string) => {
@@ -112,9 +106,10 @@ const HomeHeader = ({}: Props) => {
     console.log("onSelect", value);
   };
   return (
-    <header className="p-3  bg-[#6c757d] text-white w-full flex justify-center items-center gap-32 ">
+    <header className="flex p-3  xl:bg-[#6c757d] xl:text-white w-full  justify-center items-center gap-20 xl:gap-32 ">
+      <MobileNavbar />
       <p className="font-extrabold text-2xl font-mono">Copyclone</p>
-      <div className="w-[500px] ">
+      <div className="w-[500px] hidden xl:block">
         <AutoComplete
           dropdownMatchSelectWidth={252}
           style={{ width: "100%" }}
@@ -130,30 +125,42 @@ const HomeHeader = ({}: Props) => {
           />
         </AutoComplete>
       </div>
-      <div className="flex gap-6">
-        <Dropdown menu={{ items }}>
-          <Badge count={5} className="text-2xl text-white">
+      <div className="flex gap-2   xl:gap-6 ">
+        <Dropdown menu={{ items }} placement="bottom">
+          <Badge count={5} className="text-2xl xl:text-white">
             <CiDiscount1 className="" />
           </Badge>
         </Dropdown>
 
-        <Dropdown menu={{ items }}>
-          <Badge count={5} className="text-2xl text-white">
+        <Dropdown
+          menu={{ items }}
+          placement="bottom"
+          className="hidden xl:inline-block"
+        >
+          <Badge count={5} className="text-2xl xl:text-white">
             <CiBellOn />
           </Badge>
         </Dropdown>
-        <Dropdown menu={{ items }}>
-          <Badge count={5} className="text-2xl text-white">
+        <Dropdown
+          menu={{ items }}
+          placement="bottom"
+          className="hidden xl:inline-block"
+        >
+          <Badge count={5} className="text-2xl xl:text-white">
             <CiHeart />
           </Badge>
         </Dropdown>
-        <Dropdown menu={{ items }}>
-          <Badge count={5} className="text-2xl text-white">
+        <CiSearch
+          className="text-2xl xl:text-white inline-block xl:hidden"
+          onClick={() => setOpenSearch(!openSearch)}
+        />
+        <Dropdown menu={{ items }} placement="bottom">
+          <Badge count={5} className="text-2xl xl:text-white">
             <CiShoppingBasket />
           </Badge>
         </Dropdown>
       </div>
-      <div className="flex gap-3">
+      <div className="hidden xl:flex gap-3">
         <Button type="primary" className="bg-blue-500 flex gap-1 items-center">
           <CiUser /> Login
         </Button>

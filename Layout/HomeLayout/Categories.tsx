@@ -14,7 +14,7 @@ type Props = {};
 
 const Categories = ({}: Props) => {
   return (
-    <div className="w-full flex items-center justify-center shadow-lg ">
+    <div className=" hidden w-full md:flex items-center justify-center shadow-lg ">
       <Popover
         placement="bottom"
         title={text}
