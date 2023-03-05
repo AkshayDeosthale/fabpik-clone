@@ -24,7 +24,7 @@ const HomeFooter = ({}: Props) => {
               <Input
                 placeholder="Enter your email here..."
                 size="large"
-                className="focus:ring-2 focus:bg-transparent focus:ring-pink-200 focus:border-pink-500"
+                className="focus:ring-2 focus:bg-transparent focus:ring-pink-200 focus:border-pink-500 hover:ring-pink-200 hover:border-pink-500"
               />
             </div>
             <button className="inline-flex text-white bg-pink-500 border-0 p-3 focus:outline-none hover:bg-pink-600 rounded-lg">
